@@ -1,4 +1,4 @@
-package com.nylo.nylo_app
+package deliciae.idunn.statistica
 
 import io.flutter.embedding.android.FlutterActivity
 

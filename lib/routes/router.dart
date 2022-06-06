@@ -1,5 +1,8 @@
+import 'package:flutter_app/resources/pages/account_page.dart';
 import 'package:flutter_app/resources/pages/home_page.dart';
+import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
+import 'package:flutter_app/resources/pages/splash_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -15,7 +18,7 @@ import 'package:page_transition/page_transition.dart';
 */
 
 appRouter() => nyRoutes((router) {
-      router.route("/", (context) => MyHomePage(title: "Hello World"));
+      router.route("/", (context) => SplashPage());
 
       router.route(
         "/settings",
@@ -23,7 +26,7 @@ appRouter() => nyRoutes((router) {
         transition: PageTransitionType.leftToRightWithFade
       );
 
-      // Add your routes here
+      router.route("/login", (context) => LoginPage(), transition: PageTransitionType.fade);
 
-      // router.route("/new-page", (context) => NewPage(), transition: PageTransitionType.fade);
+      router.route("/account", (context) => AccountPage(), transition: PageTransitionType.fade);
     });
