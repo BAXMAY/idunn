@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:flutter_app/resources/widgets/states/auth_state.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends NyStatefulWidget {
   SplashPage({Key? key}) : super(key: key);
 
   @override

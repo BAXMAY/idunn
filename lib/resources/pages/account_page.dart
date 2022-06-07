@@ -4,7 +4,7 @@ import 'package:flutter_app/utils/constants.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AccountPage extends StatefulWidget {
+class AccountPage extends NyStatefulWidget {
   AccountPage({Key? key}) : super(key: key);
   
   @override

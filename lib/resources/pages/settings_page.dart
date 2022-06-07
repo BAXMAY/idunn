@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends NyStatefulWidget {
   SettingsPage({Key? key}) : super(key: key);
   
   @override

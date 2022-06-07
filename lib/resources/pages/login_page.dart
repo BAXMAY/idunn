@@ -5,7 +5,7 @@ import 'package:flutter_app/utils/constants.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends NyStatefulWidget {
   LoginPage({Key? key}) : super(key: key);
   
   @override
