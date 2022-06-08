@@ -3,5 +3,6 @@
   "changelog": "changelog",
   "micro-framework for Flutter": "micro-framework for Flutter",
   "hello": "hello {{name}}",
-  "settings": "settings"
+  "settings": "settings",
+  "language": "language"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_app/resources/pages/account_page.dart';
 import 'package:flutter_app/resources/pages/home_page.dart';
+import 'package:flutter_app/resources/pages/language_setting_page.dart';
 import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/resources/pages/main_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
@@ -22,6 +23,9 @@ appRouter() => nyRoutes((router) {
       router.route("/", (context) => SplashPage());
 
       router.route("/settings", (context) => SettingsPage(),
+          transition: PageTransitionType.leftToRightWithFade);
+
+      router.route("/settings/language", (context) => LanguageSettingPage(languageCode: NyLocalization.instance.languageCode),
           transition: PageTransitionType.leftToRightWithFade);
 
       router.route("/login", (context) => LoginPage(),
