@@ -15,8 +15,6 @@ class MainPage extends NyStatefulWidget {
 class _MainPageState extends AuthRequiredState<MainPage> {
   int _selectedIndex = 0;
 
-  AppSettings _appSettings = new AppSettings.init(true, 'en');
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -48,7 +46,7 @@ class _MainPageState extends AuthRequiredState<MainPage> {
   }
 
   Future<void> _onTapSettings() async {
-    await Navigator.pushNamed(context, "/settings", arguments: _appSettings);
+    await Navigator.pushNamed(context, "/settings");
 
     //  Force rebuild widget
     setState(() {});

@@ -14,7 +14,6 @@ class SettingsPage extends NyStatefulWidget {
 }
 
 class _SettingsPageState extends NyState<SettingsPage> {
-  late AppSettings _appSettings;
   @override
   init() async {}
 
@@ -31,15 +30,12 @@ class _SettingsPageState extends NyState<SettingsPage> {
 
     await Navigator.pushNamed(context, '/settings/language');
 
-    setState(() {
-      _appSettings.language = NyLocalization.instance.languageCode;
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    //  Get AppSettings object of route arguments
-    _appSettings = ModalRoute.of(context)!.settings.arguments as AppSettings;
+    final ThemeController themeController = ThemeProvider.controllerOf(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -54,19 +50,19 @@ class _SettingsPageState extends NyState<SettingsPage> {
                 SettingsTile.navigation(
                   leading: Icon(Icons.language),
                   title: Text('Language'),
-                  value: Text(_appSettings.language),
+                  value: Text(NyLocalization.instance.languageCode),
                   onPressed: _onPressLanguageSetting,
                 ),
                 SettingsTile.switchTile(
                   onToggle: (value) {
-                    _appSettings.darkTheme = value;
                     NyTheme.set(context,
                         id: (value
                             ? 'default_dark_theme'
                             : 'default_light_theme'));
                     setState(() {});
                   },
-                  initialValue: _appSettings.darkTheme,
+                  initialValue:
+                      themeController.currentThemeId == 'default_dark_theme',
                   leading: Icon(Icons.format_paint),
                   title: Text('Enable dark theme'),
                 ),

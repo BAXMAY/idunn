@@ -61,6 +61,8 @@ class AppBuild extends StatelessWidget {
   Widget build(BuildContext context) {
     return LocalizedApp(
       child: ThemeProvider(
+        saveThemesOnChange: true,
+        loadThemeOnInit: true,
         themes: appThemes
             .map((appTheme) => appTheme.toAppTheme(
                 defaultTheme: appTheme.theme.brightness == Brightness.light
