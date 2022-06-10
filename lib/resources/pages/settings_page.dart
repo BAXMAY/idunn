@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/app_settings.dart';
-import 'package:flutter_app/resources/pages/language_setting_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:nylo_framework/theme/helper/ny_theme.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -41,35 +38,33 @@ class _SettingsPageState extends NyState<SettingsPage> {
       appBar: AppBar(
         title: Text("settings".tr().capitalize()),
       ),
-      body: SafeArea(
-        child: Container(
-          child: SettingsList(sections: [
-            SettingsSection(
-              title: Text('Personalization'),
-              tiles: <SettingsTile>[
-                SettingsTile.navigation(
-                  leading: Icon(Icons.language),
-                  title: Text('Language'),
-                  value: Text(NyLocalization.instance.languageCode),
-                  onPressed: _onPressLanguageSetting,
-                ),
-                SettingsTile.switchTile(
-                  onToggle: (value) {
-                    NyTheme.set(context,
-                        id: (value
-                            ? 'default_dark_theme'
-                            : 'default_light_theme'));
-                    setState(() {});
-                  },
-                  initialValue:
-                      themeController.currentThemeId == 'default_dark_theme',
-                  leading: Icon(Icons.format_paint),
-                  title: Text('Enable dark theme'),
-                ),
-              ],
-            ),
-          ]),
-        ),
+      body: Container(
+        child: SettingsList(sections: [
+          SettingsSection(
+            title: Text('Personalization'),
+            tiles: <SettingsTile>[
+              SettingsTile.navigation(
+                leading: Icon(Icons.language),
+                title: Text('Language'),
+                value: Text(NyLocalization.instance.languageCode),
+                onPressed: _onPressLanguageSetting,
+              ),
+              SettingsTile.switchTile(
+                onToggle: (value) {
+                  NyTheme.set(context,
+                      id: (value
+                          ? 'default_dark_theme'
+                          : 'default_light_theme'));
+                  setState(() {});
+                },
+                initialValue:
+                    themeController.currentThemeId == 'default_dark_theme',
+                leading: Icon(Icons.format_paint),
+                title: Text('Enable dark theme'),
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }

@@ -18,19 +18,19 @@ class LightThemeColors implements BaseColorStyles {
   Color get surfaceContent => Colors.black;
 
   // app bar
-  Color get appBarBackground => Colors.blue;
+  Color get appBarBackground => Color(0xFF5D69B3);
   Color get appBarPrimaryContent => Colors.white;
 
   // buttons
-  Color get buttonBackground => Colors.blueAccent;
+  Color get buttonBackground => Color(0xFF5D69B3);
   Color get buttonPrimaryContent => Colors.white;
 
   // bottom tab bar
   Color get bottomTabBarBackground => Colors.white;
 
   // bottom tab bar - icons
-  Color get bottomTabBarIconSelected => Colors.blue;
-  Color get bottomTabBarIconUnselected => Colors.black54;
+  Color get bottomTabBarIconSelected => Colors.black54;
+  Color get bottomTabBarIconUnselected => Colors.grey.withOpacity(0.5);
 
   // bottom tab bar - label
   Color get bottomTabBarLabelUnselected => Colors.black45;

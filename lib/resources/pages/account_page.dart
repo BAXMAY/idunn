@@ -6,13 +6,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AccountPage extends NyStatefulWidget {
   AccountPage({Key? key}) : super(key: key);
-  
+
   @override
   _AccountPageState createState() => _AccountPageState();
 }
 
 class _AccountPageState extends AuthRequiredState<AccountPage> {
-
   final _usernameController = TextEditingController();
   final _websiteController = TextEditingController();
   var _loading = false;
@@ -90,32 +89,30 @@ class _AccountPageState extends AuthRequiredState<AccountPage> {
     _websiteController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
-          children: [
-            TextFormField(
-              controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'User Name'),
-            ),
-            const SizedBox(height: 18),
-            TextFormField(
-              controller: _websiteController,
-              decoration: const InputDecoration(labelText: 'Website'),
-            ),
-            const SizedBox(height: 18),
-            ElevatedButton(
-                onPressed: _updateProfile,
-                child: Text(_loading ? 'Saving...' : 'Update')),
-            const SizedBox(height: 18),
-            ElevatedButton(onPressed: _signOut, child: const Text('Sign Out')),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+        children: [
+          TextFormField(
+            controller: _usernameController,
+            decoration: const InputDecoration(labelText: 'User Name'),
+          ),
+          const SizedBox(height: 18),
+          TextFormField(
+            controller: _websiteController,
+            decoration: const InputDecoration(labelText: 'Website'),
+          ),
+          const SizedBox(height: 18),
+          ElevatedButton(
+              onPressed: _updateProfile,
+              child: Text(_loading ? 'Saving...' : 'Update')),
+          const SizedBox(height: 18),
+          ElevatedButton(onPressed: _signOut, child: const Text('Sign Out')),
+        ],
       ),
     );
   }

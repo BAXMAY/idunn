@@ -1,154 +1,217 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/controllers/home_controller.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/widgets/safearea_widget.dart';
+import 'package:flutter_app/resources/widgets/app_large_text_widget.dart';
+import 'package:flutter_app/resources/widgets/app_text_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:nylo_framework/theme/helper/ny_theme.dart';
 
-class MyHomePage extends NyStatefulWidget {
-  final HomeController controller = HomeController();
-  final String title;
-
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomePage extends NyStatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends NyState<MyHomePage> {
-  bool _darkMode = true;
+class _HomePageState extends NyState<HomePage> with TickerProviderStateMixin {
+  var images = {
+    "balloning.png": "Balloning",
+    "hiking.png": "Hiking",
+    "kayaking.png": "Kayaking",
+    "snorkling.png": "Snorkling",
+  };
 
   @override
   init() async {}
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-      ),
-      body: SafeAreaWidget(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                getImageAsset("nylo_logo.png"),
-                height: 100,
-                width: 100,
-              ),
-              Text(
-                getEnv("APP_NAME"),
-                style: textTheme.headline2,
-              ),
-              Text(
-                "micro-framework for Flutter".tr().capitalize(),
-                style: textTheme.subtitle1!
-                    .setColor(context, (color) => color.primaryAccent),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "Build something amazing 💡️",
-                style: textTheme.bodyText2,
-                textAlign: TextAlign.center,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Divider(),
-                  Container(
-                    height: 170,
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    decoration: BoxDecoration(
-                        color: ThemeColor.get(context).surfaceBackground,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 9,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ]),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        MaterialButton(
-                          child: Text(
-                            "documentation".tr().capitalize(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .setColor(
-                                    context, (color) => color.surfaceContent),
-                          ),
-                          onPressed: widget.controller.onTapDocumentation,
-                        ),
-                        Divider(
-                          height: 0,
-                        ),
-                        MaterialButton(
-                          child: Text(
-                            "Settings",
-                            style: textTheme.bodyText1!.setColor(
-                                context, (color) => color.surfaceContent),
-                          ),
-                          onPressed: () =>
-                              widget.controller.onTapSettings(context),
-                        ),
-                        Divider(
-                          height: 0,
-                        ),
-                        MaterialButton(
-                          child: Text(
-                            "changelog".tr().capitalize(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .setColor(
-                                    context, (color) => color.surfaceContent),
-                          ),
-                          onPressed: widget.controller.onTapChangeLog,
-                        ),
-                      ],
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //  Menu text
+          Container(
+            padding: EdgeInsets.only(top: 70, left: 20),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.menu,
+                  size: 30,
+                  color: Colors.black54,
+                ),
+                Expanded(child: Container()),
+                Container(
+                  margin: EdgeInsets.only(right: 20),
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey.withOpacity(0.5)),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          //  Discover text
+          Container(
+              margin: EdgeInsets.only(left: 20),
+              child: AppLargeText(text: 'Discover')),
+          SizedBox(
+            height: 20,
+          ),
+          //  TabBar
+          Container(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TabBar(
+                labelPadding: EdgeInsets.only(left: 20, right: 20),
+                controller: _tabController,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: CircleTabIndicator(
+                    color: ThemeColor.get(context).buttonBackground, radius: 4),
+                tabs: [
+                  Tab(
+                    text: "Places",
                   ),
-                  Text(
-                    "Framework Version: $nyloVersion",
-                    style: textTheme.bodyText2!.copyWith(color: Colors.grey),
+                  Tab(
+                    text: "Inspiration",
                   ),
-                  Switch(
-                      value: _darkMode,
-                      onChanged: (value) {
-                        _darkMode = value;
-                        NyTheme.set(context,
-                            id: (_darkMode == true
-                                ? 'default_dark_theme'
-                                : 'default_light_theme'));
-                        setState(() {});
-                      }),
-                  Text("${_darkMode == true ? "Dark" : "Light"} Mode"),
-                  InkWell(
-                    child: Text("Switch to Thai"),
-                    onTap: () async {
-                      if (NyLocalization.instance.languageCode == 'th') {
-                        await changeLanguage('en');
-                      } else {
-                        await changeLanguage('th');
-                      }
-                    },
-                  )
+                  Tab(
+                    text: "Emotions",
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          Container(
+              padding: EdgeInsets.only(left: 20),
+              height: 300,
+              width: double.maxFinite,
+              child: TabBarView(controller: _tabController, children: [
+                ListView.builder(
+                  itemCount: 3,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(right: 15, top: 10),
+                      width: 200,
+                      height: 300,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          image: DecorationImage(
+                              image: AssetImage(getImageAsset("mountain.jpeg")),
+                              fit: BoxFit.cover)),
+                    );
+                  },
+                ),
+                Text("Hi"),
+                Text("Hi")
+              ])),
+          SizedBox(
+            height: 30,
+          ),
+          //  Explore text
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppLargeText(
+                  text: "Explore more",
+                  size: 22,
+                ),
+                AppText(
+                  text: "See all",
+                  color: Colors.black54,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          //
+          Container(
+            height: 120,
+            width: double.maxFinite,
+            margin: EdgeInsets.only(left: 20),
+            child: ListView.builder(
+              itemCount: 4,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(right: 30),
+                  child: Column(
+                    children: [
+                      Container(
+                        // margin: EdgeInsets.only(right: 50),
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: AssetImage(getImageAsset(
+                                    images.keys.elementAt(index))),
+                                fit: BoxFit.cover)),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: AppText(
+                            text: images.values.elementAt(index),
+                            color: Colors.black54),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
+  }
+}
+
+class CircleTabIndicator extends Decoration {
+  final Color color;
+  double radius;
+
+  CircleTabIndicator({required this.color, required this.radius});
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _CirclePainter(color: color, radius: radius);
+  }
+}
+
+class _CirclePainter extends BoxPainter {
+  final Color color;
+  double radius;
+
+  _CirclePainter({required this.color, required this.radius});
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    Paint _paint = Paint();
+    _paint.color = color;
+    _paint.isAntiAlias = true;
+    final Offset circleOffset = Offset(
+        configuration.size!.width / 2 - radius / 2,
+        configuration.size!.height - radius);
+    canvas.drawCircle(offset + circleOffset, radius, _paint);
   }
 }

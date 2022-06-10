@@ -46,25 +46,23 @@ class _LanguageSettingPageState extends NyState<LanguageSettingPage> {
       appBar: AppBar(
         title: Text('language'.tr().capitalize()),
       ),
-      body: SafeArea(
-        child: Container(
-          child: SettingsList(sections: [
-            SettingsSection(
-              tiles: <SettingsTile>[
-                SettingsTile(
-                  title: Text("English"),
-                  trailing: trailingWidget(0),
-                  onPressed: (BuildContext context) => _onSelectLanguage(0),
-                ),
-                SettingsTile(
-                  title: Text("ไทย"),
-                  trailing: trailingWidget(1),
-                  onPressed: (BuildContext context) => _onSelectLanguage(1),
-                ),
-              ],
-            ),
-          ]),
-        ),
+      body: Container(
+        child: SettingsList(sections: [
+          SettingsSection(
+            tiles: <SettingsTile>[
+              SettingsTile(
+                title: Text("English"),
+                trailing: trailingWidget(0),
+                onPressed: (BuildContext context) => _onSelectLanguage(0),
+              ),
+              SettingsTile(
+                title: Text("ไทย"),
+                trailing: trailingWidget(1),
+                onPressed: (BuildContext context) => _onSelectLanguage(1),
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }

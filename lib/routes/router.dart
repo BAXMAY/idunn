@@ -1,10 +1,11 @@
 import 'package:flutter_app/resources/pages/account_page.dart';
-import 'package:flutter_app/resources/pages/home_page.dart';
+import 'package:flutter_app/resources/pages/_home_page.dart';
 import 'package:flutter_app/resources/pages/language_setting_page.dart';
 import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/resources/pages/main_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
 import 'package:flutter_app/resources/pages/splash_page.dart';
+import 'package:flutter_app/resources/pages/welcome_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -20,12 +21,16 @@ import 'package:page_transition/page_transition.dart';
 */
 
 appRouter() => nyRoutes((router) {
-      router.route("/", (context) => SplashPage());
+      router.route("/welcome", (context) => WelcomePage(),
+          transition: PageTransitionType.scale);
 
       router.route("/settings", (context) => SettingsPage(),
           transition: PageTransitionType.leftToRightWithFade);
 
-      router.route("/settings/language", (context) => LanguageSettingPage(languageCode: NyLocalization.instance.languageCode),
+      router.route(
+          "/settings/language",
+          (context) => LanguageSettingPage(
+              languageCode: NyLocalization.instance.languageCode),
           transition: PageTransitionType.leftToRightWithFade);
 
       router.route("/login", (context) => LoginPage(),

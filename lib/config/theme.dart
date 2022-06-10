@@ -16,8 +16,8 @@ import 'package:flutter_app/resources/themes/styles/light_theme_colors.dart';
 
 // App Themes
 final appThemes = [
-  ThemeConfig.dark(),
   ThemeConfig.light(),
+  ThemeConfig.dark(),
 ];
 
 /*

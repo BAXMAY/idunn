@@ -7,13 +7,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends NyStatefulWidget {
   LoginPage({Key? key}) : super(key: key);
-  
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends AuthState<LoginPage> {
-
   bool _isLoading = false;
   late final TextEditingController _emailController;
 
@@ -24,9 +23,7 @@ class _LoginPageState extends AuthState<LoginPage> {
     final response = await supabase.auth.signIn(
         email: _emailController.text,
         options: AuthOptions(
-            redirectTo: kIsWeb
-                ? null
-                : 'io.supabase.idunn://login-callback/'));
+            redirectTo: kIsWeb ? null : 'io.supabase.idunn://login-callback/'));
     final error = response.error;
     if (error != null) {
       context.showErrorSnackBar(message: error.message);
@@ -51,28 +48,26 @@ class _LoginPageState extends AuthState<LoginPage> {
     _emailController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Sign In')),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
-          children: [
-            const Text('Sign in via the magic link with your email below'),
-            const SizedBox(height: 18),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            const SizedBox(height: 18),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _signIn,
-              child: Text(_isLoading ? 'Loading' : 'Send Magic Link'),
-            ),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+        children: [
+          const Text('Sign in via the magic link with your email below'),
+          const SizedBox(height: 18),
+          TextFormField(
+            controller: _emailController,
+            decoration: const InputDecoration(labelText: 'Email'),
+          ),
+          const SizedBox(height: 18),
+          ElevatedButton(
+            onPressed: _isLoading ? null : _signIn,
+            child: Text(_isLoading ? 'Loading' : 'Send Magic Link'),
+          ),
+        ],
       ),
     );
   }
