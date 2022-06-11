@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/config/theme.dart';
+import 'package:flutter_app/cubit/app_cubit_logics.dart';
+import 'package:flutter_app/cubit/app_cubits.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 // ignore: must_be_immutable
@@ -103,6 +106,10 @@ class AppBuild extends StatelessWidget {
               locale: locale,
               supportedLocales:
                   supportedLocales ?? NyLocalization.instance.locals(),
+              home: BlocProvider<AppCubits>(
+                create: (context) => AppCubits(),
+                child: AppCubitLogics(),
+              ),
             ),
           ),
         ),
