@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/cubit/app_cubits.dart';
 import 'package:flutter_app/resources/widgets/app_large_text_widget.dart';
 import 'package:flutter_app/resources/widgets/app_text_widget.dart';
 import 'package:flutter_app/resources/widgets/responsive_button_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class WelcomePage extends NyStatefulWidget {
@@ -66,8 +68,20 @@ class _WelcomePageState extends NyState<WelcomePage> {
                         SizedBox(
                           height: 40,
                         ),
-                        ResponsiveButton(
-                          width: 120,
+                        GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<AppCubits>(context).getData();
+                          },
+                          child: Container(
+                            width: 200,
+                            child: Row(
+                              children: [
+                                ResponsiveButton(
+                                  width: 120,
+                                ),
+                              ],
+                            ),
+                          ),
                         )
                       ],
                     ),
